@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Создатель паролей</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .main-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 550px;
+        }
+        .title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .title i {
+            color: #667eea;
+            margin-right: 10px;
+        }
+        .input-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .input-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .input-label {
+            font-weight: 500;
+            color: #555;
+            margin-right: 15px;
+            min-width: 120px;
+        }
+        .number-input {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            width: 100px;
+            transition: border-color 0.3s;
+        }
+        .number-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        .generate-btn:hover {
+            transform: translateY(-2px);
+        }
+        .results {
+            margin-top: 30px;
+        }
+        .results-title {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .password-box {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            word-break: break-all;
+        }
+        .hint {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-box">
+        <h1 class="title">🔒 Создатель паролей</h1>
+        
+        <div class="input-section">
+            <form method="POST">
+                <div class="input-row">
+                    <span class="input-label">Длина пароля:</span>
+                    <input type="number" name="size" value="14" min="8" max="30" class="number-input">
+                </div>
+                <button type="submit" class="generate-btn">
+                    Создать 5 паролей
+                </button>
+            </form>
+        </div>
+
+        {% if passwords_list %}
+        <div class="results">
+            <h2 class="results-title">Ваши новые пароли:</h2>
+            {% for pass_item in passwords_list %}
+            <div class="password-box">{{ pass_item }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="hint">
+            💡 Для надежности используйте пароли длиной от 12 символов
+        </div>
+    </div>
+</body>
+</html>
