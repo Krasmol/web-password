@@ -46,6 +46,7 @@ def login():
         if username == USERNAME and password == PASSWORD:
             failed_attempts[user_ip] = 0
             session['user'] = username
+            print(f"Привет, {session['user']})! Это ваш личный кабинет")
             return redirect(url_for('generator'))
         else:
             failed_attempts[user_ip] += 1
