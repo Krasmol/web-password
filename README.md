@@ -13,13 +13,6 @@
 Цифры (0-9)
 Специальные символы (!@#$%&*)
 
-Технологии:
-
-1) Backend: Python Flask
-2) Фронтенд: HTML, CSS (через Jinja2 templates)
-3) Безопасность: Python secrets module
-4) Генерация строк: Python string module
-
 Установка и Запуск:
 
 1. Клонируйте репозиторий:
