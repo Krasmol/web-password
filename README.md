@@ -24,7 +24,7 @@
 
 1. Клонируйте репозиторий:
 
-git clone https://github.com/your-username/password-generator.git
+git clone https://github.com/Krasmol/web-password.git
 cd password-generator
 
 1. Установите зависимости:
