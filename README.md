@@ -60,4 +60,3 @@ password-generator/
 Длина пароля: Измените значение size в строке size = int(request.form.get('size', 14))
 Количество паролей: Измените диапазон в цикле for i in range(5)
 Набор символов: Измените строку characters = string.ascii_letters + string.digits + "!@#$%&*"
-Примечание: Для использования в продакшн среде рекомендуется отключить debug режим (debug=False).
