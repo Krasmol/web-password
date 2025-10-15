@@ -3,7 +3,8 @@
 Простое веб-приложение на Flask для генерации безопасных случайных паролей. Приложение создает криптографически стойкие пароли с использованием модуля secrets Python.
 
 
-<img width="1920" height="944" alt="image" src="https://github.com/user-attachments/assets/95b1d46e-d0ae-4acb-8457-e4d8c29f7e55" />
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/eec76ae3-92b0-45b4-b5e6-0ee21a46d768" />
+
 
 
 
