@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Создатель паролей</title>
+    <title>Генератор паролей</title>
     <style>
         * {
             margin: 0;
@@ -9,526 +9,131 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ffff00, #ff00ff, #00ffff);
-            background-size: 1200% 1200%;
-            animation: rainbowBackground 4s linear infinite;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
-            overflow: hidden;
         }
-
-        @keyframes rainbowBackground {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        .main-box {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow:
-                0 0 60px rgba(255, 0, 0, 0.6),
-                0 0 90px rgba(0, 255, 0, 0.6),
-                0 0 120px rgba(0, 0, 255, 0.6);
-            width: 100%;
-            max-width: 600px;
-            animation: boxDance 3s ease-in-out infinite;
-            backdrop-filter: blur(15px);
-            border: 3px solid transparent;
-            background: linear-gradient(45deg, rgba(255,255,255,0.95), rgba(240,240,240,0.95)) padding-box,
-                       linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ffff00, #ff00ff) border-box;
-            animation: borderSpin 4s linear infinite;
-        }
-
-        @keyframes borderSpin {
-            0% { border-image: linear-gradient(0deg, #ff0000, #00ff00, #0000ff, #ffff00, #ff00ff) 1; }
-            20% { border-image: linear-gradient(72deg, #ff00ff, #ff0000, #00ff00, #0000ff, #ffff00) 1; }
-            40% { border-image: linear-gradient(144deg, #ffff00, #ff00ff, #ff0000, #00ff00, #0000ff) 1; }
-            60% { border-image: linear-gradient(216deg, #0000ff, #ffff00, #ff00ff, #ff0000, #00ff00) 1; }
-            80% { border-image: linear-gradient(288deg, #00ff00, #0000ff, #ffff00, #ff00ff, #ff0000) 1; }
-            100% { border-image: linear-gradient(360deg, #ff0000, #00ff00, #0000ff, #ffff00, #ff00ff) 1; }
-        }
-
-        @keyframes boxDance {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg) scale(1);
-            }
-            25% {
-                transform: translateY(-10px) rotate(1deg) scale(1.02);
-            }
-            50% {
-                transform: translateY(5px) rotate(-1deg) scale(1.01);
-            }
-            75% {
-                transform: translateY(-5px) rotate(0.5deg) scale(1.02);
-            }
-        }
-
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 3px dashed;
-            border-image: linear-gradient(45deg, #ff0000, #00ff00, #0000ff) 1;
-            animation: borderFlow 3s linear infinite;
+            border-bottom: 1px solid #eee;
+            text-align: center;
         }
-
-        @keyframes borderFlow {
-            0% { border-image: linear-gradient(0deg, #ff0000, #00ff00, #0000ff) 1; }
-            50% { border-image: linear-gradient(180deg, #0000ff, #ffff00, #ff00ff) 1; }
-            100% { border-image: linear-gradient(360deg, #ff0000, #00ff00, #0000ff) 1; }
-        }
-
         .title {
             color: #333;
-            font-size: 36px;
-            font-weight: 900;
-            animation: titleMadness 2s ease-in-out infinite;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            position: relative;
+            font-size: 28px;
+            font-weight: bold;
         }
-
-        @keyframes titleMadness {
-            0% {
-                transform: scale(1) rotate(-3deg) skew(-2deg);
-color: #ff0000;
-                text-shadow: 4px 4px 0px #00ff00;
-            }
-            25% {
-                transform: scale(1.1) rotate(3deg) skew(2deg);
-                color: #00ff00;
-                text-shadow: -4px 4px 0px #0000ff;
-            }
-            50% {
-                transform: scale(1.15) rotate(-5deg) skew(-4deg);
-                color: #0000ff;
-                text-shadow: 4px -4px 0px #ffff00;
-            }
-            75% {
-                transform: scale(1.1) rotate(5deg) skew(4deg);
-                color: #ffff00;
-                text-shadow: -4px -4px 0px #ff00ff;
-            }
-            100% {
-                transform: scale(1) rotate(-3deg) skew(-2deg);
-                color: #ff0000;
-                text-shadow: 4px 4px 0px #00ff00;
-            }
-        }
-
-        .user-info {
-            color: #666;
-            font-size: 16px;
-            font-weight: 600;
-            animation: userFlip 4s ease-in-out infinite;
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 400% 400%;
-            animation: userColorShift 3s linear infinite, userFlip 5s ease-in-out infinite;
-        }
-
-        @keyframes userFlip {
-            0%, 100% { transform: perspective(400px) rotateY(0deg) scale(1); }
-            25% { transform: perspective(400px) rotateY(90deg) scale(1.1); }
-            50% { transform: perspective(400px) rotateY(180deg) scale(1.2); }
-            75% { transform: perspective(400px) rotateY(270deg) scale(1.1); }
-        }
-
-        @keyframes userColorShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .logout-btn {
-            background: linear-gradient(45deg, #ff0000, #ff6b6b);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
-            animation: logoutSpin 2s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-        }
-
-        @keyframes logoutSpin {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
-        }
-
-        .logout-btn:hover {
-            animation: logoutHover 0.5s ease-in-out;
-            transform: rotate(360deg) scale(1.2);
-        }
-
         .input-section {
-            background: rgba(248, 249, 250, 0.9);
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            animation: inputSectionDance 3s ease-in-out infinite;
-            border: 2px solid;
-            border-image: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ffff00) 1;
-            animation: inputBorderRotate 5s linear infinite;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid #e9ecef;
         }
-
-        @keyframes inputBorderRotate {
-            0% { border-image: linear-gradient(0deg, #ff0000, #00ff00, #0000ff, #ffff00) 1; }
-            25% { border-image: linear-gradient(90deg, #ffff00, #ff0000, #00ff00, #0000ff) 1; }
-            50% { border-image: linear-gradient(180deg, #0000ff, #ffff00, #ff0000, #00ff00) 1; }
-            75% { border-image: linear-gradient(270deg, #00ff00, #0000ff, #ffff00, #ff0000) 1; }
-            100% { border-image: linear-gradient(360deg, #ff0000, #00ff00, #0000ff, #ffff00) 1; }
-        }
-
-        @keyframes inputSectionDance {
-            0%, 100% { transform: translateX(0) rotate(0deg); }
-            25% { transform: translateX(-5px) rotate(-1deg); }
-            50% { transform: translateX(5px) rotate(1deg); }
-            75% { transform: translateX(-3px) rotate(-0.5deg); }
-        }
-
         .input-row {
             display: flex;
             align-items: center;
-            margin-bottom: 25px;
-            animation: rowBounce 2s ease-in-out infinite;
+            margin-bottom: 20px;
+            justify-content: center;
         }
-@keyframes rowBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
         .input-label {
-            font-weight: 700;
+            font-weight: 500;
             color: #555;
-            margin-right: 20px;
-            min-width: 150px;
-            font-size: 18px;
-            animation: labelFlip 3s ease-in-out infinite;
-            display: inline-block;
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 400% 400%;
-            animation: labelColorShift 4s linear infinite, labelFlip 3s ease-in-out infinite;
+            margin-right: 15px;
+            min-width: 120px;
         }
-
-        @keyframes labelFlip {
-            0% { transform: perspective(500px) rotateX(0deg) rotateY(0deg); }
-            25% { transform: perspective(500px) rotateX(180deg) rotateY(90deg); }
-            50% { transform: perspective(500px) rotateX(0deg) rotateY(180deg); }
-            75% { transform: perspective(500px) rotateX(-180deg) rotateY(270deg); }
-            100% { transform: perspective(500px) rotateX(0deg) rotateY(360deg); }
-        }
-
-        @keyframes labelColorShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         .number-input {
-            padding: 15px;
-            border: 3px solid;
-            border-image: linear-gradient(45deg, #ff0000, #00ff00, #0000ff) 1;
-            border-radius: 15px;
-            font-size: 18px;
-            width: 120px;
-            font-weight: 700;
-            text-align: center;
-            animation: inputPulse 1.5s ease-in-out infinite, inputBorderChange 3s linear infinite;
-            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100px;
         }
-
-        @keyframes inputPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        .number-input:focus {
+            outline: none;
+            border-color: #007bff;
         }
-
-        @keyframes inputBorderChange {
-            0% { border-image: linear-gradient(45deg, #ff0000, #00ff00, #0000ff) 1; }
-            33% { border-image: linear-gradient(45deg, #00ff00, #0000ff, #ffff00) 1; }
-            66% { border-image: linear-gradient(45deg, #0000ff, #ffff00, #ff00ff) 1; }
-            100% { border-image: linear-gradient(45deg, #ff0000, #00ff00, #0000ff) 1; }
-        }
-
         .generate-btn {
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ffff00, #ff00ff);
-            background-size: 500% 500%;
+            background: #28a745;
             color: white;
             border: none;
-            padding: 20px 40px;
-            border-radius: 15px;
-            font-size: 20px;
-            font-weight: 900;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
             cursor: pointer;
             width: 100%;
-            animation: gradientMadness 2s linear infinite, buttonWobble 1.5s ease-in-out infinite;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(255,255,255,0.5);
+            transition: background-color 0.3s;
         }
-
-        @keyframes gradientMadness {
-            0% { background-position: 0% 0%; }
-            25% { background-position: 100% 0%; }
-            50% { background-position: 100% 100%; }
-            75% { background-position: 0% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-
-        @keyframes buttonWobble {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(-5deg) scale(1.1); }
-            50% { transform: rotate(5deg) scale(1.15); }
-            75% { transform: rotate(-3deg) scale(1.1); }
-        }
-
         .generate-btn:hover {
-            animation: buttonExplosion 0.5s ease-in-out;
-            transform: scale(1.3) rotate(360deg);
+            background: #218838;
         }
-
-        @keyframes buttonExplosion {
-            0% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.5) rotate(180deg); }
-            100% { transform: scale(1.3) rotate(360deg); }
-        }
-.generate-btn::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: buttonStorm 2s linear infinite;
-        }
-
-        @keyframes buttonStorm {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(360deg); }
-        }
-
         .results {
-            margin-top: 40px;
-            animation: resultsSlide 1s ease-out;
+            margin-top: 30px;
         }
-
-        @keyframes resultsSlide {
-            from {
-                opacity: 0;
-                transform: translateY(50px) scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
         .results-title {
             color: #333;
-            margin-bottom: 20px;
-            font-size: 24px;
-            font-weight: 700;
-            animation: resultsTitleFlip 2s ease-in-out infinite;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 500;
             text-align: center;
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 400% 400%;
-            animation: resultsTitleColor 3s linear infinite, resultsTitleFlip 2s ease-in-out infinite;
         }
-
-        @keyframes resultsTitleFlip {
-            0% { transform: perspective(400px) rotateX(0deg) rotateY(0deg); }
-            50% { transform: perspective(400px) rotateX(180deg) rotateY(180deg); }
-            100% { transform: perspective(400px) rotateX(360deg) rotateY(360deg); }
-        }
-
-        @keyframes resultsTitleColor {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         .password-box {
-            background: rgba(248, 249, 250, 0.9);
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 15px;
-            border-left: 6px solid;
-            border-image: linear-gradient(45deg, #ff0000, #00ff00, #0000ff) 1;
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
             font-family: 'Courier New', monospace;
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 16px;
             color: #333;
             word-break: break-all;
-            animation: passwordGlow 2s ease-in-out infinite, passwordFloat 3s ease-in-out infinite;
             cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
+            transition: background-color 0.3s;
         }
-
-        @keyframes passwordGlow {
-            0%, 100% {
-                box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-            }
-            25% {
-                box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 30px rgba(0, 0, 255, 0.5);
-            }
-            75% {
-                box-shadow: 0 0 20px rgba(255, 255, 0, 0.4);
-            }
-        }
-
-        @keyframes passwordFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-5px) rotate(-1deg); }
-            66% { transform: translateY(5px) rotate(1deg); }
-        }
-
         .password-box:hover {
-            animation: passwordHover 0.5s ease-in-out;
-            transform: scale(1.05) rotate(5deg);
-            background: rgba(255, 255, 255, 1);
+            background: #e9ecef;
         }
-
-        .password-box::before {
-            content: '📋 Копировать';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .password-box:hover::before {
-            opacity: 1;
-        }
-.hint {
+        .hint {
             text-align: center;
             color: #666;
-            font-size: 16px;
-            margin-top: 30px;
+            font-size: 14px;
+            margin-top: 20px;
             font-style: italic;
-            animation: hintDance 4s ease-in-out infinite;
-            font-weight: 600;
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 400% 400%;
-            animation: hintColorShift 4s linear infinite, hintDance 4s ease-in-out infinite;
-        }
-
-        @keyframes hintDance {
-            0%, 100% { transform: translateX(0) rotate(0deg); }
-            25% { transform: translateX(-20px) rotate(-5deg); }
-            50% { transform: translateX(20px) rotate(5deg); }
-            75% { transform: translateX(-10px) rotate(-3deg); }
-        }
-
-        @keyframes hintColorShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Безумные плавающие элементы */
-        .crazy-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .crazy-element {
-            position: absolute;
-            font-size: 32px;
-            opacity: 0.4;
-            animation: crazyFloat 8s linear infinite;
-        }
-
-        @keyframes crazyFloat {
-            0% {
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-            25% {
-                transform: translate(80vw, 40vh) rotate(90deg) scale(1.5);
-            }
-            50% {
-                transform: translate(40vw, 80vh) rotate(180deg) scale(2);
-            }
-            75% {
-                transform: translate(60vw, 20vh) rotate(270deg) scale(1.5);
-            }
-            100% {
-                transform: translate(0, 0) rotate(360deg) scale(1);
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Безумные плавающие элементы -->
-    <div class="crazy-elements">
-        <div class="crazy-element" style="top:10%; left:5%; animation-delay: 0s;">🔐</div>
-        <div class="crazy-element" style="top:20%; left:85%; animation-delay: -1s;">⚡</div>
-        <div class="crazy-element" style="top:60%; left:15%; animation-delay: -2s;">🔑</div>
-        <div class="crazy-element" style="top:80%; left:75%; animation-delay: -3s;">🚀</div>
-        <div class="crazy-element" style="top:40%; left:95%; animation-delay: -4s;">💥</div>
-        <div class="crazy-element" style="top:90%; left:50%; animation-delay: -5s;">🎯</div>
-        <div class="crazy-element" style="top:30%; left:60%; animation-delay: -6s;">🔥</div>
-    </div>
-
-    <div class="main-box">
+    <div class="container">
         <div class="header">
-            <h1 class="title">💥 ГЕНЕРАТОР ПАРОЛЕЙ ⚡</h1>
-            <div class="user-info">
-                👤 {{ user }}
-                <a href="{{ url_for('logout') }}" class="logout-btn">🚪 Выйти</a>
-            </div>
+            <h1 class="title">Генератор паролей</h1>
         </div>
 
         <div class="input-section">
             <form method="POST">
                 <div class="input-row">
-                    <span class="input-label">📏 Длина пароля:</span>
+                    <span class="input-label">Длина пароля:</span>
                     <input type="number" name="length" value="12" min="8" max="30" class="number-input">
                 </div>
                 <button type="submit" class="generate-btn">
-                    🎲 СОЗДАТЬ 5 ПАРОЛЕЙ 🎲
+                    Сгенерировать 5 паролей
                 </button>
             </form>
         </div>
 
         {% if passwords %}
         <div class="results">
-            <h2 class="results-title">🎉 ВАШИ НОВЫЕ ПАРОЛИ: 🎉</h2>
+            <h2 class="results-title">Сгенерированные пароли:</h2>
             {% for password in passwords %}
             <div class="password-box" onclick="copyToClipboard(this)">{{ password }}</div>
             {% endfor %}
@@ -536,7 +141,7 @@ color: #ff0000;
         {% endif %}
 
         <div class="hint">
-            💫 Для надежности используйте пароли длиной от 12 символов! 💫
+            💡 Для надежности используйте пароли длиной от 12 символов
         </div>
     </div>
 <script>
@@ -544,22 +149,16 @@ color: #ff0000;
             const text = element.textContent;
             navigator.clipboard.writeText(text).then(() => {
                 const originalText = element.textContent;
-                element.textContent = '✅ Скопировано!';
-                element.style.background = 'linear-gradient(45deg, #00ff00, #00cc00)';
+                element.textContent = '✓ Скопировано!';
+                element.style.background = '#d4edda';
+                element.style.borderLeftColor = '#28a745';
                 setTimeout(() => {
                     element.textContent = originalText;
                     element.style.background = '';
+                    element.style.borderLeftColor = '#007bff';
                 }, 2000);
             });
         }
-
-        // Добавляем случайные эффекты при загрузке
-        document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('.password-box, .input-label, .results-title');
-            elements.forEach(el => {
-                el.style.animationDelay = Math.random() * 2 + 's';
-            });
-        });
     </script>
 </body>
 </html>
