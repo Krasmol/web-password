@@ -1,6 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
+        <title>Генератор паролей</title>
+    <style>
+        /* ... существующие стили ... */
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+        }
+        .logout-btn:hover {
+            background: #c82333;
+        }
+        .manager-btn {
+            background: #007bff;
+            color: white;
+        }
+        .manager-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Генератор паролей</h1>
+            <div class="user-info">
+                <div>Вы вошли как: {{ username }}</div>
+                <div class="nav-buttons">
+                    <a href="{{ url_for('manager') }}" class="btn manager-btn">Менеджер паролей</a>
+                    <a href="{{ url_for('logout') }}" class="btn logout-btn">Выйти</a>
+                </div>
+            </div>
+        </div>
+
     <title>Генератор паролей</title>
     <style>
         * {
