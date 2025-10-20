@@ -1,0 +1,424 @@
+> ㅤ:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Менеджер паролей</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .title {
+            color: #333;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .user-info {
+            color: #666;
+            font-size: 14px;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+        }
+        .logout-btn:hover {
+            background: #c82333;
+        }
+        .generator-btn {
+            background: #28a745;
+            color: white;
+        }
+        .generator-btn:hover {
+            background: #218838;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 500;
+        }
+        .generator-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .form-input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .number-input {
+            width: 100px;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .complexity-section {
+            margin: 20px 0;
+        }
+        .complexity-title {
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-item input {
+            margin-right: 8px;
+        }
+        .generate-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .generate-btn:hover {
+            background: #0056b3;
+        }
+        .passwords-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .password-option {
+            background: white;
+            padding: 15px;
+            border: 2px solid #ddd;
+
+> ㅤ:
+border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            word-break: break-all;
+        }
+        .password-option:hover {
+            border-color: #007bff;
+            background: #f8f9fa;
+        }
+        .password-option.selected {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+        .save-section {
+            background: #e7f3ff;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #b3d7ff;
+            margin-top: 20px;
+        }
+        .save-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+        .save-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .save-btn:hover {
+            background: #218838;
+        }
+        .save-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .passwords-list {
+            margin-top: 20px;
+        }
+        .password-item {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .password-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .site-name {
+            font-weight: bold;
+            color: #333;
+            font-size: 18px;
+        }
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .delete-btn:hover {
+            background: #c82333;
+        }
+        .password-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .detail-item {
+            margin-bottom: 8px;
+        }
+        .detail-label {
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 3px;
+        }
+        .detail-value {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 8px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .detail-value:hover {
+            background: #e9ecef;
+        }
+        .empty-message {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Менеджер паролей</h1>
+            <div class="user-info">
+                <div>Вы вошли как: {{ username }}</div>
+                <div class="nav-buttons">
+                    <a href="{{ url_for('logout') }}" class="btn logout-btn">Выйти</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Сгенерировать пароли</h2>
+            <div class="generator-section">
+                <form method="POST">
+                    <div style="display: flex; gap: 20px; align-items: end;">
+                        <div class="form-group">
+                            <label class="form-label">Длина пароля:</label>
+                            <input type="number" name="length" value="12" min="8" max="30" class="form-input number-input">
+
+> ㅤ:
+</div>
+
+                        <div class="complexity-section">
+                            <div class="complexity-title">Типы символов:</div>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="uppercase" name="uppercase" checked>
+                                    <label for="uppercase">A-Z</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="lowercase" name="lowercase" checked>
+                                    <label for="lowercase">a-z</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="digits" name="digits" checked>
+                                    <label for="digits">0-9</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="special" name="special" checked>
+                                    <label for="special">!@#$%&*</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" name="generate_passwords" class="generate-btn" style="width: auto;">
+                            Сгенерировать
+                        </button>
+                    </div>
+                </form>
+
+                {% if generated_passwords %}
+                <div class="passwords-grid" id="passwordsGrid">
+                    {% for password in generated_passwords %}
+                    <div class="password-option" onclick="selectPassword(this, '{{ password }}')">
+                        {{ password }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="save-section">
+                    <form method="POST" id="saveForm">
+                        <div class="save-form">
+                            <div class="form-group">
+                                <label class="form-label">Сайт/Сервис:</label>
+                                <input type="text" name="site" class="form-input" required placeholder="Google, Facebook и т.д.">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Логин/Email:</label>
+                                <input type="text" name="site_login" class="form-input" required placeholder="Ваш логин">
+                            </div>
+
+                            <input type="hidden" name="selected_password" id="selectedPassword">
+                            <button type="submit" name="save_password" class="save-btn" id="saveBtn" disabled>
+                                Сохранить пароль
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Сохраненные пароли</h2>
+            <div class="passwords-list">
+                {% if saved_passwords %}
+                    {% for item in saved_passwords %}
+                    <div class="password-item">
+                        <div class="password-header">
+                            <div class="site-name">{{ item.site }}</div>
+                            <form method="POST" style="display: inline;">
+                                <button type="submit" name="delete_password" value="{{ loop.index0 }}" class="delete-btn"
+                                        onclick="return confirm('Удалить этот пароль?')">
+                                    Удалить
+                                </button>
+                            </form>
+                        </div>
+                        <div class="password-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Логин:</div>
+                                <div class="detail-value" onclick="copyToClipboard(this)">{{ item.login }}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Пароль:</div>
+                                <div class="detail-value" onclick="copyToClipboard(this)">{{ item.password }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-message">
+                        У вас пока нет сохраненных паролей. Сгенерируйте и сохраните первый пароль выше.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedPasswordValue = '';
+
+        function selectPassword(element, password) {
+            document.querySelectorAll('.password-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+
+            element.classList.add('selected');
+            selectedPasswordValue = password;
+
+            document.getElementById('selectedPassword').value = password;
+            document.getElementById('saveBtn').disabled = false;
+        }
+
+        function copyToClipboard(element) {
+            const text = element.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = element.textContent;
+                element.textContent = 'Скопировано!';
+                element.style.background = '#d4edda';
+                setTimeout(() => {
+                    element.textContent = originalText;
+                    element.style.background = '';
+                }, 2000);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstPassword = document.querySelector('.password-option');
+            if (firstPassword) {
+                selectPassword(firstPassword, firstPassword.textContent);
+            }
+        });
+    </script>
+</body>
+</html>
